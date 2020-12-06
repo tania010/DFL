@@ -100,17 +100,6 @@ Unfortunately, there is no "make everything ok" button in DeepFaceLab. You shoul
 </td></tr>
 <tr><td align="center" width="9999">
 
-## Mini tutorial
-
-<a href="https://www.youtube.com/watch?v=1smpMsfC3ls">
-
-<img src="doc/mini_tutorial.jpg" align="center">
-
-</a>
-
-</td></tr>
-<tr><td align="center" width="9999">
-
 ## Releases
 
 ||||
@@ -122,7 +111,16 @@ Unfortunately, there is no "make everything ok" button in DeepFaceLab. You shoul
 ||||
 
 </td></tr>
+
 <tr><td align="center" width="9999">
+
+## Mini tutorial
+
+<a href="https://www.youtube.com/watch?v=1smpMsfC3ls">
+
+<img src="doc/mini_tutorial.jpg" align="center">
+
+</a>
 
 ## Links
 
