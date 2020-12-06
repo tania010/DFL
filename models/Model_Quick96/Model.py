@@ -308,7 +308,8 @@ class QModel(ModelBase):
         face = nn.to_data_format(face[None,...], self.model_data_format, "NHWC")
 
         bgr, mask_dst_dstm, mask_src_dstm = [ nn.to_data_format(x, "NHWC", self.model_data_format).astype(np.float32) for x in self.AE_merge (face) ]
-        return bgr[0], mask_src_dstm[0][...,0], mask_dst_dstm[0][...,0]
+        mask = mask_dst_dstm[0] * mask_src_dstm[0]
+        return bgr[0], mask[...,0]
 
     #override
     def get_MergerConfig(self):

@@ -71,9 +71,7 @@ class ExtractSubprocessor(Subprocessor):
                 self.rects_extractor = facelib.S3FDExtractor(place_model_on_cpu=place_model_on_cpu)
 
             if self.type == 'all' or 'landmarks' in self.type:
-                # for head type, extract "3D landmarks"
-                self.landmarks_extractor = facelib.FANExtractor(landmarks_3D=self.face_type >= FaceType.HEAD,
-                                                                place_model_on_cpu=place_model_on_cpu)
+                self.landmarks_extractor = facelib.FANExtractor(place_model_on_cpu=place_model_on_cpu)
 
             self.cached_image = (None, None)
 
@@ -692,7 +690,7 @@ def main(detector=None,
          ):
     face_type = FaceType.fromString(face_type)
 
-    image_size = 512 if face_type < FaceType.HEAD else 768
+    image_size = 512
     
     if not input_path.exists():
         io.log_err ('Input directory not found. Please ensure it exists.')

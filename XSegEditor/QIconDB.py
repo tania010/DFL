@@ -19,4 +19,3 @@ class QIconDB():
         QIconDB.right = QIcon ( str(icon_path / 'right.png') )
         QIconDB.pt_edit_mode = QIcon ( str(icon_path / 'pt_edit_mode.png') )
         QIconDB.view_baked = QIcon ( str(icon_path / 'view_baked.png') )
-        QIconDB.view_xseg = QIcon ( str(icon_path / 'view_xseg.png') )
