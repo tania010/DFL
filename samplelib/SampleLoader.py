@@ -6,7 +6,6 @@ from pathlib import Path
 
 import samplelib.PackedFaceset
 from core import pathex
-from core.mplib import MPSharedList
 from core.interact import interact as io
 from core.joblib import Subprocessor
 from DFLIMG import *
@@ -34,9 +33,6 @@ class SampleLoader:
 
     @staticmethod
     def load(sample_type, samples_path, subdirs=False):
-        """
-        Return MPSharedList of samples
-        """
         samples_cache = SampleLoader.samples_cache
 
         if str(samples_path) not in samples_cache.keys():
@@ -60,12 +56,12 @@ class SampleLoader:
 
                 if result is None:
                     result = SampleLoader.load_face_samples( pathex.get_image_paths(samples_path, subdirs=subdirs) )
+                samples[sample_type] = result
 
-                samples[sample_type] = MPSharedList(result)
         elif          sample_type == SampleType.FACE_TEMPORAL_SORTED:
                 result = SampleLoader.load (SampleType.FACE, samples_path)
                 result = SampleLoader.upgradeToFaceTemporalSortedSamples(result)
-                samples[sample_type] = MPSharedList(result)
+                samples[sample_type] = result
 
         return samples[sample_type]
 
