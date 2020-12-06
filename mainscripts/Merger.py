@@ -1,5 +1,4 @@
 ﻿import math
-import multiprocessing
 import traceback
 from pathlib import Path
 
@@ -14,8 +13,7 @@ from core.joblib import MPClassFuncOnDemand, MPFunc
 from core.leras import nn
 from DFLIMG import DFLIMG
 from facelib import FaceEnhancer, FaceType, LandmarksProcessor, XSegNet
-from merger import FrameInfo, InteractiveMergerSubprocessor, MergerConfig
-
+from merger import FrameInfo, MergerConfig, InteractiveMergerSubprocessor
 
 def main (model_class_name=None,
           saved_models_path=None,
@@ -72,9 +70,6 @@ def main (model_class_name=None,
 
         if not is_interactive:
             cfg.ask_settings()
-            
-        subprocess_count = io.input_int("Number of workers?", max(8, multiprocessing.cpu_count()), 
-                                        valid_range=[1, multiprocessing.cpu_count()], help_message="Specify the number of threads to process. A low value may affect performance. A high value may result in memory error. The value may not be greater than CPU cores." )
 
         input_path_image_paths = pathex.get_image_paths(input_path)
 
@@ -204,8 +199,7 @@ def main (model_class_name=None,
                             frames_root_path       = input_path,
                             output_path            = output_path,
                             output_mask_path       = output_mask_path,
-                            model_iter             = model.get_iter(),
-                            subprocess_count       = subprocess_count,
+                            model_iter             = model.get_iter()
                         ).run()
 
         model.finalize()
