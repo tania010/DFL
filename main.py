@@ -22,8 +22,6 @@ if __name__ == "__main__":
         def __call__(self, parser, namespace, values, option_string=None):
             setattr(namespace, self.dest, os.path.abspath(os.path.expanduser(values)))
 
-    exit_code = 0
-    
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
 
@@ -264,9 +262,7 @@ if __name__ == "__main__":
     def process_xsegeditor(arguments):
         osex.set_process_lowest_prio()
         from XSegEditor import XSegEditor
-        global exit_code
-        exit_code = XSegEditor.start (Path(arguments.input_dir))
-        
+        XSegEditor.start (Path(arguments.input_dir))
     p.add_argument('--input-dir', required=True, action=fixPathAction, dest="input_dir")
 
     p.set_defaults (func=process_xsegeditor)
@@ -317,10 +313,7 @@ if __name__ == "__main__":
     arguments = parser.parse_args()
     arguments.func(arguments)
 
-    if exit_code == 0:
-        print ("Done.")
-        
-    exit(exit_code)
+    print ("Done.")
     
 '''
 import code
