@@ -14,21 +14,19 @@ class XSegNet(object):
     VERSION = 1
 
     def __init__ (self, name, 
-                        resolution=256, 
+                        resolution, 
                         load_weights=True, 
                         weights_file_root=None, 
                         training=False, 
                         place_model_on_cpu=False, 
                         run_on_cpu=False, 
                         optimizer=None, 
-                        data_format="NHWC",
-                        raise_on_no_model_files=False):
-                
-        self.resolution = resolution
-        self.weights_file_root = Path(weights_file_root) if weights_file_root is not None else Path(__file__).parent
-        
+                        data_format="NHWC"):
+                        
         nn.initialize(data_format=data_format)
         tf = nn.tf
+
+        self.weights_file_root = Path(weights_file_root) if weights_file_root is not None else Path(__file__).parent
 
         with tf.device ('/CPU:0'):
             #Place holders on CPU
@@ -64,17 +62,11 @@ class XSegNet(object):
             do_init = not load_weights
 
             if not do_init:
-                model_file_path = self.weights_file_root / filename
-                do_init = not model.load_weights( model_file_path )
-                if do_init and raise_on_no_model_files:
-                    raise Exception(f'{model_file_path} does not exists.')
+                do_init = not model.load_weights( self.weights_file_root / filename )
 
             if do_init:
                 model.init_weights()
-    
-    def get_resolution(self):
-        return self.resolution
-        
+
     def flow(self, x):
         return self.model(x)
 
@@ -86,7 +78,7 @@ class XSegNet(object):
             model.save_weights( self.weights_file_root / filename )
 
     def extract (self, input_image):
-        input_shape_len = len(input_image.shape)            
+        input_shape_len = len(input_image.shape)
         if input_shape_len == 3:
             input_image = input_image[None,...]
 
