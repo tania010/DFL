@@ -231,14 +231,7 @@ Unfortunately, there is no "make everything ok" button in DeepFaceLab. You shoul
 
 <img src="doc/meme2.jpg" align="center">
 
-</td> </tr>
-
-<tr>
-<td colspan=2>
-<img src="doc/meme3.jpg" align="center">
-
 </td>
-</tr>
 
 </table>
 
