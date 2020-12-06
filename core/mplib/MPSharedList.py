@@ -117,7 +117,7 @@ class ArrayFillerSubprocessor(Subprocessor):
 
     #override
     def process_info_generator(self):
-        for i in range(min(multiprocessing.cpu_count(), 8)):
+        for i in range(multiprocessing.cpu_count()):
             yield 'CPU%d' % (i), {}, {'sh_b':self.sh_b}
 
     #override
